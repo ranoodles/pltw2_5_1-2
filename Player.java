@@ -24,6 +24,13 @@ public class Player
     System.out.println("Welcome to the game "+name);
   }
   /* your code here - accessor(s) */ 
-
-  /* your code here - mutator(s) */ 
+  public String getName() {
+    return name;
+  }
+  public int getPoints() {
+    return points;
+  }
+  /* your code here - mutator(s) */
+  public void setName(String inputName) {/* */}
+  public void addToPoints(int value) {/* */} 
 }

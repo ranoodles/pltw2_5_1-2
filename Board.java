@@ -20,7 +20,15 @@ public class Board
     System.out.println("Phrase: " + phrase);
   }
   /* your code here - accessor(s) */
-  
+  public String getSolvedPhrase() {
+    return solvedPhrase;
+  }
+  public String getPhrase() {
+    return phrase;
+  }
+  public int getCurrentValue() {
+    return currentLetterValue;
+  }
   /* your code here - mutator(s)  */
 
 
@@ -85,25 +93,37 @@ public class Board
     }  
     
     return tempPhrase;
-  }  
+  }
 
+  /*
+   * Takes a guessed letter as an input and checked if it was even in the word.
+   * The method changes the solvedPhrase based on the input of the program.
+   * Precondition:
+   *  User must guess a letter and it needs to be the word
+   * Postcondition:
+   *  Returns a boolean of whether or not the letter is in the word
+   *  The solvedPhrase String is modified based on the guess
+   */
   public boolean guessLetter(String guess)
   {
     boolean foundLetter = false;
-    String newSolvedPhrase = "";
-    
+    String newSolvedPhrase = "";  
+    //loops through all characters in a String
     for (int i = 0; i < phrase.length(); i++)
     {
-      if (phrase.substring(i, i + 1).equals(guess))
-      {
+      //compares each letter to guess
+      if (phrase.substring(i, i + 1).equals(guess)) {
+        //add letter to newSolvedPhrase to show it filled out
         newSolvedPhrase += guess + " ";
         foundLetter = true;
       }
-      else
-      {
+      //The guessed letter is not in the phrase so copy current underscore and space to new solved phrase.
+      //i*2 is used because solvedPhrase is double in length due to added spaces
+      else {
         newSolvedPhrase += solvedPhrase.substring(i * 2, i * 2 + 1) + " ";  
       }
     }
+    //solvedPhrase is assigned the new phrase
     solvedPhrase = newSolvedPhrase;
     return foundLetter;
   } 
