@@ -26,25 +26,43 @@ public class PhraseSolver
   public void play()
   {
     boolean solved = false;
-    int currentPlayer = 1;
+    boolean isPlayer1 = true;
+    Player playerCurrent = player1;
 
     Scanner input = new Scanner(System.in);
     
-    boolean correct = true;
     while (!solved) 
     {
       /* your code here - game logic */
-      if (currentPlayer % 2 == 1) {
-        System.out.println("Player Name: " + player1.getName());
-      } else {
-        System.out.println("Player Name: " + player1.getName());
-      }
+      System.out.println("\n" + player1.getName() + " Score: " + player1.getPoints());
+      System.out.println(player2.getName() + " Score: " + player2.getPoints() + "\n");
+
+      System.out.println("It is " + playerCurrent.getName() + "\'s turn");
       System.out.println(board.getSolvedPhrase());
-      System.out.println(board.getCurrentValue());
-      /* your code here - determine how game ends */
-      solved = true; 
-    } 
-   
+      System.out.print("Type a phrase or letter to guess: ");
+      String userGuess = input.nextLine();
+
+      if (board.guessLetter(userGuess)) {
+        System.out.println("That was a good guess!");
+        playerCurrent.addToPoints(board.getLetterValue());
+      } else if (board.isSolved(userGuess)) {
+        solved = true;
+        playerCurrent.addToPoints(board.getLetterValue());
+      } else {
+        System.out.println("Nope, that was incorrect!");
+      }
+
+      isPlayer1 = !isPlayer1;
+      playerCurrent = isPlayer1 ? player1 : player2;
+    }
+
+    System.out.println("Congrats, the correct phrase was " + board.getPhrase());
+    if (player1.getPoints() > player2.getPoints()) {
+      System.out.println(player1.getName() + " won with " + player1.getPoints());
+    } else if (player2.getPoints() > player1.getPoints()) {
+      System.out.println(player2.getName() + " won with " + player2.getPoints());
+    } else {
+      System.out.println("Both players tied!");
+    }
   }
-  
 }

@@ -31,6 +31,10 @@ public class Player
     return points;
   }
   /* your code here - mutator(s) */
-  public void setName(String inputName) {/* */}
-  public void addToPoints(int value) {/* */} 
+  public void setName(String inputName) {
+    name = inputName;
+  }
+  public void addToPoints(int value) {
+    points += value;
+  } 
 }
